@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+
+    <!--html的控件类型-->
+    <util:map id="htmlElementTypeConfig" map-class="java.util.LinkedHashMap">
+        <entry key="input" value="input"/>
+        <entry key="checkbox" value="checkbox"/>
+        <entry key="select" value="select"/>
+        <entry key="textarea" value="textarea"/>
+    </util:map>
+
+    <!--html控件的数据类型-->
+    <util:map id="htmlValueTypeConfig" map-class="java.util.LinkedHashMap">
+        <entry key="String" value="字符串"/>
+        <entry key="Long" value="整数"/>
+        <entry key="Double" value="带小数点的数字"/>
+        <entry key="Date" value="时间"/>
+    </util:map>
+
+    <util:map id="dictionaryConfig" map-class="java.util.HashMap">
+        <entry key="htmlValueTypeConfig" value-ref="htmlValueTypeConfig"/>
+        <entry key="htmlElementTypeConfig" value-ref="htmlElementTypeConfig"/>
+    </util:map>
+</beans>

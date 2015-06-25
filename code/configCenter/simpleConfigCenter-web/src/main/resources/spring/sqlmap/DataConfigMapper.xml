@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.jr.simpleconfig.dao.DataConfigMapper">
+    <sql id="whereSelectiveSql">
+        <if test="query!= null">
+                                        <if test="query.id != null">
+                        and   id = #{query.id}
+                    </if>
+                
+                                    <if test="query.systemName != null and query.systemName!=''">
+                    and   systemName = #{query.systemName}
+                </if>
+                
+                                    <if test="query.dataKey != null and query.dataKey!=''">
+                    and   dataKey = #{query.dataKey}
+                </if>
+                
+                                    <if test="query.dataDesc != null and query.dataDesc!=''">
+                    and   dataDesc = #{query.dataDesc}
+                </if>
+                
+                                    <if test="query.data != null and query.data!=''">
+                    and   data = #{query.data}
+                </if>
+                
+                                        <if test="query.createDate != null">
+                        and   createDate = #{query.createDate}
+                    </if>
+                
+                                        <if test="query.updateTime != null">
+                        and   updateTime = #{query.updateTime}
+                    </if>
+                
+            </if>
+    </sql>
+
+    <!--config_data表所有字段-->
+    <sql id="Base_Column_List">
+                    id  ,   <!---->
+                    systemName  ,   <!---->
+                    dataKey  ,   <!---->
+                    dataDesc  ,   <!---->
+                    data  ,   <!---->
+                    createDate  ,   <!---->
+                    updateTime     <!---->
+            </sql>
+
+    <!--config_data表除了主键id的所有字段-->
+    <sql id="Base_Column_List_WithOutPk">
+                                                        systemName      ,  <!---->
+                                                dataKey      ,  <!---->
+                                                dataDesc      ,  <!---->
+                                                data      ,  <!---->
+                                                createDate      ,  <!---->
+                                                updateTime        <!---->
+                        </sql>
+
+    <!--javabean除了主键id的所有字段-->
+    <sql id="Javabean_Column_List_WithOutPk">
+                                                                           #{systemName} ,                    <!---->
+                                                                  #{dataKey} ,                    <!---->
+                                                                  #{dataDesc} ,                    <!---->
+                                                                  #{data} ,                    <!---->
+                                                                     now() ,                        <!---->
+                                                                     now()                         <!---->
+                       </sql>
+
+    <!--查找config_data表所有数据-->
+    <select id="findAll" resultType="DataConfig">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM config_data
+    </select>
+    <!--统计config_data表的数据总量-->
+    <select id="findCount" parameterType="Long" resultType="java.lang.Long">
+        SELECT count(id )
+        FROM config_data where 1=1 , <include refid="whereSelectiveSql" />
+    </select>
+
+    <!--根据条件，查找config_data表相应数据-->
+    <select id="queryBySelective" parameterType="DataConfig"  resultType="DataConfig">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM config_data where  1=1    <include refid="whereSelectiveSql" />
+    </select>
+
+    <!--根据条件，查找config_data表相应数据的总量-->
+    <select id="queryCountBySelective" parameterType="DataConfig"  resultType="java.lang.Long">
+        SELECT
+        count(id )
+
+        FROM  config_data  where 1=1    <include refid="whereSelectiveSql" />
+    </select>
+
+
+    <!--根据主键id，查找config_data表的唯一数据-->
+    <select id="queryByPrimaryKey" parameterType="Long"  resultType="DataConfig">
+
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM  config_data  where  id = #{id}
+    </select>
+
+    <!--根据主键id，删除config_data表的唯一数据-->
+    <delete id="deleteByPrimaryKey" parameterType="Long">
+        DELETE FROM config_data WHERE id = #{id}
+    </delete>
+
+    <!--根据主键id，更新config_data表相应数据-->
+    <update id="updateByPrimaryKeySelective" parameterType="DataConfig">
+        UPDATE config_data
+        <set>
+                            <if test="id != null">
+                    id=#{id},
+                </if>
+                            <if test="systemName != null">
+                    systemName=#{systemName},
+                </if>
+                            <if test="dataKey != null">
+                    dataKey=#{dataKey},
+                </if>
+                            <if test="dataDesc != null">
+                    dataDesc=#{dataDesc},
+                </if>
+                            <if test="data != null">
+                    data=#{data},
+                </if>
+                            <if test="createDate != null">
+                    createDate=#{createDate},
+                </if>
+                            <if test="updateTime != null">
+                    updateTime=#{updateTime},
+                </if>
+                    </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--保存数据-->
+    <insert id="save" parameterType="DataConfig">
+        INSERT INTO config_data
+        (
+        <include refid="Base_Column_List_WithOutPk" />
+        )
+        VALUES
+        (
+        <include refid="Javabean_Column_List_WithOutPk" />
+        )
+    </insert>
+
+    <!--根据条件，分页查找config_data表相应数据-->
+    <select id="queryBySelectiveForPagination" parameterType="DataConfig"  resultType="DataConfig">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM config_data where  1=1    <include refid="whereSelectiveSql" />
+        order by id LIMIT #{startRow} , #{pageSize}
+    </select>
+
+    <!--根据条件，分页查找config_data表相应数据的总量-->
+    <select id="queryCountBySelectiveForPagination" parameterType="DataConfig"  resultType="java.lang.Long">
+        SELECT
+        count(id )
+        FROM config_data where  1=1       <include refid="whereSelectiveSql" />
+    </select>
+
+ 
+          <delete id="deleteByUniqueIndexsystemNamedataKey" parameterType="DataConfig">
+            DELETE FROM config_data WHERE      systemName=#{systemName} and      dataKey=#{dataKey} and   1=1
+        </delete>
+    
+    </mapper>

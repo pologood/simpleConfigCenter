@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">
+
+    <profiles>
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+
+            <properties>
+
+
+                <profile.jdbc.driverClassName>com.mysql.jdbc.Driver</profile.jdbc.driverClassName>
+                <profile.datasource.url>jdbc:mysql://192.168.146.71:3358/baoxian_erp?createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;useUnicode=true</profile.datasource.url>
+                <profile.datasource.username>root</profile.datasource.username>
+                <profile.datasource.password>123456</profile.datasource.password>
+
+                <profile.mina.serverAddress>127.0.0.1:6488</profile.mina.serverAddress>
+                <profile.mina.serverAddress.port>6488</profile.mina.serverAddress.port>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+
+            <properties>
+
+
+
+                <profile.jdbc.driverClassName>com.mysql.jdbc.Driver</profile.jdbc.driverClassName>
+                <profile.datasource.url>jdbc:mysql://192.168.146.71:3358/baoxian_erp?createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;useUnicode=true</profile.datasource.url>
+                <profile.datasource.username>root</profile.datasource.username>
+                <profile.datasource.password>123456</profile.datasource.password>
+                <profile.mina.serverAddress>192.168.146.62:6488</profile.mina.serverAddress>
+                <profile.mina.serverAddress.port>6488</profile.mina.serverAddress.port>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 生产环境 -->
+            <id>online</id>
+            <properties>
+
+
+                <profile.jdbc.driverClassName>com.mysql.jdbc.Driver</profile.jdbc.driverClassName>
+                <profile.datasource.url></profile.datasource.url>
+                <profile.datasource.username>jr_distributed</profile.datasource.username>
+                <profile.datasource.password></profile.datasource.password>
+                <profile.mina.serverAddress>172.23.171.124:6490</profile.mina.serverAddress>
+                <profile.mina.serverAddress.port>6490</profile.mina.serverAddress.port>
+            </properties>
+        </profile>
+    </profiles>
+
+</profilesXml>

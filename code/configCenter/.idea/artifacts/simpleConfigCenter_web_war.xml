@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="simpleConfigCenter-web:war">
+    <output-path>$PROJECT_DIR$/simpleConfigCenter-web/target</output-path>
+    <root id="archive" name="simpleConfigCenter-web.war">
+      <element id="artifact" artifact-name="simpleConfigCenter-web:war exploded" />
+    </root>
+  </artifact>
+</component>

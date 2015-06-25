@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter.iml" filepath="$PROJECT_DIR$/simpleConfigCenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-cache/simpleConfigCenter-cache.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-cache/simpleConfigCenter-cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-controller/simpleConfigCenter-controller.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-controller/simpleConfigCenter-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-dao/simpleConfigCenter-dao.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-dao/simpleConfigCenter-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-domain/simpleConfigCenter-domain.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-domain/simpleConfigCenter-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-export/simpleConfigCenter-export.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-export/simpleConfigCenter-export.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-service/simpleConfigCenter-service.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-service/simpleConfigCenter-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-util/simpleConfigCenter-util.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-util/simpleConfigCenter-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleConfigCenter-web/simpleConfigCenter-web.iml" filepath="$PROJECT_DIR$/simpleConfigCenter-web/simpleConfigCenter-web.iml" />
+    </modules>
+  </component>
+</project>

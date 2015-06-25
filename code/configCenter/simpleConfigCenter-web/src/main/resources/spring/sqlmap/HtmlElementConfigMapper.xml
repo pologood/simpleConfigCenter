@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.jr.simpleconfig.dao.HtmlElementConfigMapper">
+    <sql id="whereSelectiveSql">
+        <if test="query!= null">
+                                        <if test="query.id != null">
+                        and   id = #{query.id}
+                    </if>
+                
+                                    <if test="query.systemName != null and query.systemName!=''">
+                    and   systemName = #{query.systemName}
+                </if>
+                
+                                    <if test="query.elementName != null and query.elementName!=''">
+                    and   elementName = #{query.elementName}
+                </if>
+                
+                                    <if test="query.elementDisplay != null and query.elementDisplay!=''">
+                    and   elementDisplay = #{query.elementDisplay}
+                </if>
+                
+                                    <if test="query.elementType != null and query.elementType!=''">
+                    and   elementType = #{query.elementType}
+                </if>
+                
+                                    <if test="query.elementValueType != null and query.elementValueType!=''">
+                    and   elementValueType = #{query.elementValueType}
+                </if>
+                
+                                        <if test="query.elementValueCheck != null">
+                        and   elementValueCheck = #{query.elementValueCheck}
+                    </if>
+                
+                                    <if test="query.elementInitValue != null and query.elementInitValue!=''">
+                    and   elementInitValue = #{query.elementInitValue}
+                </if>
+                
+                                        <if test="query.status != null">
+                        and   status = #{query.status}
+                    </if>
+                
+                                        <if test="query.createDate != null">
+                        and   createDate = #{query.createDate}
+                    </if>
+                
+                                        <if test="query.updateTime != null">
+                        and   updateTime = #{query.updateTime}
+                    </if>
+                
+            </if>
+    </sql>
+
+    <!--config_htmlelement表所有字段-->
+    <sql id="Base_Column_List">
+                    id  ,   <!---->
+                    systemName  ,   <!---->
+                    elementName  ,   <!---->
+                    elementDisplay  ,   <!---->
+                    elementType  ,   <!---->
+                    elementValueType  ,   <!---->
+                    elementValueCheck  ,   <!---->
+                    elementInitValue  ,   <!---->
+                    status  ,   <!---->
+                    createDate  ,   <!---->
+                    updateTime     <!---->
+            </sql>
+
+    <!--config_htmlelement表除了主键id的所有字段-->
+    <sql id="Base_Column_List_WithOutPk">
+                                                        systemName      ,  <!---->
+                                                elementName      ,  <!---->
+                                                elementDisplay      ,  <!---->
+                                                elementType      ,  <!---->
+                                                elementValueType      ,  <!---->
+                                                elementValueCheck      ,  <!---->
+                                                elementInitValue      ,  <!---->
+                                                status      ,  <!---->
+                                                createDate      ,  <!---->
+                                                updateTime        <!---->
+                        </sql>
+
+    <!--javabean除了主键id的所有字段-->
+    <sql id="Javabean_Column_List_WithOutPk">
+                                                                           #{systemName} ,                    <!---->
+                                                                  #{elementName} ,                    <!---->
+                                                                  #{elementDisplay} ,                    <!---->
+                                                                  #{elementType} ,                    <!---->
+                                                                  #{elementValueType} ,                    <!---->
+                                                                  #{elementValueCheck} ,                    <!---->
+                                                                  #{elementInitValue} ,                    <!---->
+                                                                  #{status} ,                    <!---->
+                                                                     now() ,                        <!---->
+                                                                     now()                         <!---->
+                       </sql>
+
+    <!--查找config_htmlelement表所有数据-->
+    <select id="findAll" resultType="HtmlElementConfig">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM config_htmlelement
+    </select>
+    <!--统计config_htmlelement表的数据总量-->
+    <select id="findCount" parameterType="Long" resultType="java.lang.Long">
+        SELECT count(id )
+        FROM config_htmlelement where 1=1 , <include refid="whereSelectiveSql" />
+    </select>
+
+    <!--根据条件，查找config_htmlelement表相应数据-->
+    <select id="queryBySelective" parameterType="HtmlElementConfig"  resultType="HtmlElementConfig">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM config_htmlelement where  1=1    <include refid="whereSelectiveSql" />
+    </select>
+
+    <!--根据条件，查找config_htmlelement表相应数据的总量-->
+    <select id="queryCountBySelective" parameterType="HtmlElementConfig"  resultType="java.lang.Long">
+        SELECT
+        count(id )
+
+        FROM  config_htmlelement  where 1=1    <include refid="whereSelectiveSql" />
+    </select>
+
+
+    <!--根据主键id，查找config_htmlelement表的唯一数据-->
+    <select id="queryByPrimaryKey" parameterType="Long"  resultType="HtmlElementConfig">
+
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM  config_htmlelement  where  id = #{id}
+    </select>
+
+    <!--根据主键id，删除config_htmlelement表的唯一数据-->
+    <delete id="deleteByPrimaryKey" parameterType="Long">
+        DELETE FROM config_htmlelement WHERE id = #{id}
+    </delete>
+
+    <!--根据主键id，更新config_htmlelement表相应数据-->
+    <update id="updateByPrimaryKeySelective" parameterType="HtmlElementConfig">
+        UPDATE config_htmlelement
+        <set>
+                            <if test="id != null">
+                    id=#{id},
+                </if>
+                            <if test="systemName != null">
+                    systemName=#{systemName},
+                </if>
+                            <if test="elementName != null">
+                    elementName=#{elementName},
+                </if>
+                            <if test="elementDisplay != null">
+                    elementDisplay=#{elementDisplay},
+                </if>
+                            <if test="elementType != null">
+                    elementType=#{elementType},
+                </if>
+                            <if test="elementValueType != null">
+                    elementValueType=#{elementValueType},
+                </if>
+                            <if test="elementValueCheck != null">
+                    elementValueCheck=#{elementValueCheck},
+                </if>
+                            <if test="elementInitValue != null">
+                    elementInitValue=#{elementInitValue},
+                </if>
+                            <if test="status != null">
+                    status=#{status},
+                </if>
+                            <if test="createDate != null">
+                    createDate=#{createDate},
+                </if>
+                            <if test="updateTime != null">
+                    updateTime=#{updateTime},
+                </if>
+                    </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--保存数据-->
+    <insert id="save" parameterType="HtmlElementConfig">
+        INSERT INTO config_htmlelement
+        (
+        <include refid="Base_Column_List_WithOutPk" />
+        )
+        VALUES
+        (
+        <include refid="Javabean_Column_List_WithOutPk" />
+        )
+    </insert>
+
+    <!--根据条件，分页查找config_htmlelement表相应数据-->
+    <select id="queryBySelectiveForPagination" parameterType="HtmlElementConfig"  resultType="HtmlElementConfig">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM config_htmlelement where  1=1    <include refid="whereSelectiveSql" />
+        order by id LIMIT #{startRow} , #{pageSize}
+    </select>
+
+    <!--根据条件，分页查找config_htmlelement表相应数据的总量-->
+    <select id="queryCountBySelectiveForPagination" parameterType="HtmlElementConfig"  resultType="java.lang.Long">
+        SELECT
+        count(id )
+        FROM config_htmlelement where  1=1       <include refid="whereSelectiveSql" />
+    </select>
+
+ 
+          <delete id="deleteByUniqueIndexsystemNameelementName" parameterType="HtmlElementConfig">
+            DELETE FROM config_htmlelement WHERE      systemName=#{systemName} and      elementName=#{elementName} and   1=1
+        </delete>
+    
+            <delete id="deleteByCommonIndexsystemName" parameterType="HtmlElementConfig">
+            DELETE FROM config_htmlelement WHERE      systemName=#{systemName} and   1=1
+        </delete>
+    </mapper>

@@ -1,0 +1,40 @@
+
+#if(!${Obj})
+
+#else
+    #foreach($htmlElementConfig in $Obj)
+
+        <tr>
+            <td class="col-lg-1">
+        #if($htmlElementConfig.elementValueCheck==true)  <font color="#FF0000">*&nbsp;</font>#end
+                $htmlElementConfig.elementDisplay</td>
+            <td>
+              #if($!htmlElementConfig.elementType=='textarea')
+                  <textarea name="$htmlElementConfig.elementName" class="form-control" value="$!htmlElementConfig.elementInitValue"></textarea>
+              #end
+                #if($!htmlElementConfig.elementType=='input')
+               <input name="$htmlElementConfig.elementName" class="form-control" value="$!htmlElementConfig.elementInitValue">
+            #end
+
+        #if($!htmlElementConfig.elementType=='checkbox'||$!htmlElementConfig.elementType=='select')
+            #set( $initValueMap = ${htmlElementConfig.initValueMap})
+                #if($!htmlElementConfig.elementType=='checkbox')
+                    #foreach($initKey in ${initValueMap.keySet()})
+                        <input type="checkbox" value="${initValueMap.get($initKey)}"> $initKey
+                    #end
+                #end
+                #if($!htmlElementConfig.elementType=='select')
+                    <select name="$htmlElementConfig.elementName" class="form-control" >
+                        <option >请选择$htmlElementConfig.elementDisplay</option>
+                    #foreach($initKey in ${initValueMap.keySet()})
+                        <option value="$initKey">${initValueMap.get($initKey)}</option>
+                    #end
+                    </select>
+                #end
+        #end
+            </td>
+
+        </tr>
+    #end
+    　#end
+

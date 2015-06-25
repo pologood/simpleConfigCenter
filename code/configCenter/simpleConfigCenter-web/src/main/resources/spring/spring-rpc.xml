@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<bean id="httpClient" class="com.jd.jr.simpleconfig.export.proxy.PoolingHttpClient">
+    <property name="connectTimeout" value="1000"></property>
+    <property name="readTimeout" value="3000"></property>
+    <property name="waitTimeout" value="1000"></property>
+    <property name="totalMaxConnection" value="2000"></property>
+</bean>
+
+<bean id="dataConfigExport" class="com.jd.jr.simpleconfig.export.proxy.RestResourceClientProxyFactoryBean">
+<property name="serviceInterface" value="com.jd.jr.simpleconfig.export.DataConfigExport"></property>
+<property name="baseUri" value="http://127.0.0.1:8080"></property>
+<property name="httpClient" ref="httpClient"></property>
+</bean>
+
+    <bean id="dataConfigResource" class="com.jd.jr.simpleconfig.export.DataConfigResource">
+        <property name="refreshTime" value="2000"/>
+        <property name="systemName" value="test"/>
+    </bean>
+</beans>
