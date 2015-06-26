@@ -64,7 +64,7 @@
      <td>
 
          <textarea name="elementInitValue" value="" class="form-control"></textarea>
-
+如果是select、radio，请填写json
                </td>
 
   </tr>

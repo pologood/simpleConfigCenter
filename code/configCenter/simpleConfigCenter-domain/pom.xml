@@ -11,7 +11,7 @@
     <artifactId>simpleConfigCenter-domain</artifactId>
     <packaging>jar</packaging>
 
-    <name>simpleConfigCenter-service</name>
+    <name>simpleConfigCenter-domain</name>
     <url>http://maven.apache.org</url>
 
     <properties>

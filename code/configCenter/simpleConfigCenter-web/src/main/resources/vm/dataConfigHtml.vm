@@ -17,17 +17,16 @@
             #end
 
         #if($!htmlElementConfig.elementType=='checkbox'||$!htmlElementConfig.elementType=='select')
-            #set( $initValueMap = ${htmlElementConfig.initValueMap})
                 #if($!htmlElementConfig.elementType=='checkbox')
-                    #foreach($initKey in ${initValueMap.keySet()})
-                        <input type="checkbox" value="${initValueMap.get($initKey)}"> $initKey
+                    #foreach($initKey in ${htmlElementConfig.initValueMap.keySet()})
+                        <input type="checkbox" value="$initKey" class="form-control" > ${htmlElementConfig.initValueMap.get($initKey)}
                     #end
                 #end
                 #if($!htmlElementConfig.elementType=='select')
                     <select name="$htmlElementConfig.elementName" class="form-control" >
                         <option >请选择$htmlElementConfig.elementDisplay</option>
-                    #foreach($initKey in ${initValueMap.keySet()})
-                        <option value="$initKey">${initValueMap.get($initKey)}</option>
+                    #foreach($initKey in ${htmlElementConfig.initValueMap.keySet()})
+                        <option value="$initKey">${htmlElementConfig.initValueMap.get($initKey)}</option>
                     #end
                     </select>
                 #end

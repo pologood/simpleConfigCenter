@@ -11,7 +11,7 @@
     <artifactId>simpleConfigCenter-dao</artifactId>
     <packaging>jar</packaging>
 
-    <name>simpleConfigCenter-service</name>
+    <name>simpleConfigCenter-dao</name>
     <url>http://maven.apache.org</url>
 
     <properties>

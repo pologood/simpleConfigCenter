@@ -1,5 +1,6 @@
 package com.jd.jr.simpleconfig.controller;
 
+import com.google.gson.reflect.TypeToken;
 import com.jd.jr.simpleconfig.cache.SystemConfigCache;
 import com.jd.jr.simpleconfig.domain.HtmlElementConfig;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,7 +96,9 @@ public class HtmlElementConfigController {
     @ResponseBody
     public Result save(HtmlElementConfig htmlElementConfig, HttpServletRequest request) {
         Result result = new Result();
+
         try {
+            checkParam(htmlElementConfig);
             Boolean baseResult = htmlElementConfigService.save(htmlElementConfig);
             result.setStatus(baseResult);
         } catch (Exception e) {
@@ -109,9 +113,22 @@ public class HtmlElementConfigController {
         return result;
     }
 
+    private void checkParam(HtmlElementConfig htmlElementConfig) throws ErpException {
+        String elementType = htmlElementConfig.getElementType();
+        if(elementType!=null){
+            if(elementType.equals("select")||elementType.equals("checkbox")){
+                try{
+                    Map<String, String> map = GsonUtils.fromJson(htmlElementConfig.getElementInitValue(), new TypeToken<HashMap<String, String>>() {});
+                }catch (Exception e){//检查初始值数据是否是json串
+                    throw new ErpException("","初始值必须是json串");
+                }
+        }
+
+    }
+    }
+
     @RequestMapping(value = "/toEdit", method = RequestMethod.GET)
     public String toEdit(Model model, Long id, HttpServletRequest request) throws Exception {
-
         controllerUtil.loadConfigToModel(model, dictionaryConfig);
         model.addAttribute("systemConfig_uq_name_Map", systemConfigCache.systemConfig_uq_name_Map);
         HtmlElementConfig htmlElementConfig = htmlElementConfigService.queryByPrimaryKey(id);
@@ -130,6 +147,7 @@ public class HtmlElementConfigController {
     public Result edit(HtmlElementConfig htmlElementConfig, HttpServletRequest request) {
         Result result = new Result();
         try {
+            checkParam(htmlElementConfig);
             Boolean baseResult = htmlElementConfigService.updateByPrimaryKeySelective(htmlElementConfig);
             result.setStatus(baseResult);
         } catch (Exception e) {

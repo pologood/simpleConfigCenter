@@ -64,8 +64,9 @@ public class HtmlElementConfigCache implements Cache {
                             HtmlElementConfigVm htmlElementConfigVm = new HtmlElementConfigVm();
                             String elementType = htmlElementConfig.getElementType();
                             String elmentInitValue = htmlElementConfig.getElementInitValue();
-                            if (elementType.equals("select") || htmlElementConfig.equals("checkbox")) {
-                                if (elmentInitValue != null && elmentInitValue.equals("")) {
+                            if (elementType.equals("select") || elementType.equals("checkbox")) {
+
+                                if (elmentInitValue != null && !elmentInitValue.equals("")) {
                                     Map<String, String> map = GsonUtils.fromJson(elmentInitValue, new TypeToken<HashMap<String, String>>() {
                                     });
                                     htmlElementConfigVm.setInitValueMap(map);

@@ -72,7 +72,8 @@
             <td>
 
 
-                <textarea name="elementInitValue" value="${htmlElementConfig.elementInitValue}" class="form-control"></textarea>
+                <textarea name="elementInitValue" value="${htmlElementConfig.elementInitValue}" class="form-control">${htmlElementConfig.elementInitValue}</textarea>
+                如果是select、radio，请填写json
             </td>
 
         </tr>

@@ -20,12 +20,23 @@ public class HtmlElementConfigVm extends HtmlElementConfig implements Serializab
 	 * 如果控件是select或者readio,elementInitValues必须是json格式
 	 */
 	private Map<String,String> initValueMap;
-
+	/**
+	 * 设定好的值
+	 */
+	private String setValue;
 	public Map<String, String> getInitValueMap() {
 		return initValueMap;
 	}
 
 	public void setInitValueMap(Map<String, String> initValueMap) {
 		this.initValueMap = initValueMap;
+	}
+
+	public String getSetValue() {
+		return setValue;
+	}
+
+	public void setSetValue(String setValue) {
+		this.setValue = setValue;
 	}
 }

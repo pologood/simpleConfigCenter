@@ -1,5 +1,6 @@
 package com.jd.jr.simpleconfig.controller;
 
+import com.google.gson.reflect.TypeToken;
 import com.jd.jr.simpleconfig.cache.DataConfigCache;
 import com.jd.jr.simpleconfig.cache.HtmlElementConfigCache;
 import com.jd.jr.simpleconfig.cache.SystemConfigCache;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.jd.jr.simpleconfig.util.ControllerUtil;
 
@@ -110,6 +113,18 @@ public class DataConfigController {
     public String toEdit(Model model, Long id, HttpServletRequest request) throws Exception {
 
         DataConfig dataConfig = dataConfigService.queryByPrimaryKey(id);
+        Map<String, String> dataMap = GsonUtils.fromJson(dataConfig.getData(), new TypeToken<HashMap<String, String>>() {
+        });
+        List<HtmlElementConfigVm> htmlElementConfigList = (List<HtmlElementConfigVm>) htmlElementConfigCache.htmlElementConfigVm_index_systemName_MultiMap.get(dataConfig.getSystemName());
+        for (HtmlElementConfigVm htmlElementConfigVm:htmlElementConfigList){
+            String elementName = htmlElementConfigVm.getElementName();
+            String elementSetValue = dataMap.get(elementName);
+            htmlElementConfigVm.setSetValue(elementSetValue);
+        }
+        String html = VelocityTemplate.renderVelocityTemplate(htmlElementConfigList,"vm/dataConfigHtml.vm");
+        html = html.replaceAll("\r\n", "");
+
+        model.addAttribute("dataHtml", html);
         model.addAttribute("dataConfig", dataConfig);
         model.addAttribute("systemConfig_uq_name_Map", systemConfigCache.systemConfig_uq_name_Map);
         return "jsp/edit/DataConfigEdit";
@@ -201,9 +216,6 @@ public class DataConfigController {
         Result result = new Result();
         try {
             List<HtmlElementConfigVm> htmlElementConfigList = (List<HtmlElementConfigVm>) htmlElementConfigCache.htmlElementConfigVm_index_systemName_MultiMap.get(systemName);
-            for(HtmlElementConfigVm htmlElementConfig:htmlElementConfigList){
-            }
-
             String html = VelocityTemplate.renderVelocityTemplate(htmlElementConfigList,"vm/dataConfigHtml.vm");
             html = html.replaceAll("\r\n", "");
             result.setContent(html);
